@@ -1,9 +1,12 @@
-﻿# PCFAutoCompleAddress
+# PCFAutoCompleteAddress
 
-## Getting Started
+A PCF Control using addres api to autocomplete address fields
 
-### npm install
+## Getting start
 
-### npm run refreshTypes
+- npm install 
+- npm run refreshTypes
 
-### For testing : npm start watch
+## Testing
+
+- npm start watch
