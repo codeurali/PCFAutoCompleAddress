@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="PCFAutocompleteAddress" constructor="AutocompleteAddressControl" version="0.0.1" display-name-key="AutocompleteAddressControl" description-key="AutocompleteAddressControl description" control-type="virtual" >
+
+    <external-service-usage enabled="false">
+   
+    </external-service-usage>
+   
+    <property name="id" display-name-key="AdressID" description-key="AdressID" of-type="SingleLine.Text" usage="bound" required="true" />
+
+    <property name="whole_address" display-name-key="whole_address" description-key="whole_address" of-type="SingleLine.Text" usage="bound" required="false" />
+
+    <property name="street_number" display-name-key="street_numbers" description-key="street_number" of-type="SingleLine.Text" usage="bound" required="false" />
+
+    <property name="street" display-name-key="street" description-key="street" of-type="SingleLine.Text" usage="bound" required="false" />
+
+    <property name="city" display-name-key="city" description-key="city" of-type="SingleLine.Text" usage="bound" required="false" />
+
+    <property name="zip" display-name-key="zip" description-key="zip" of-type="SingleLine.Text" usage="bound" required="false" />
+
+    
+
+    <resources>
+      <code path="index.ts" order="1"/>
+      <platform-library name="React" version="16.8.6" />
+      <platform-library name="Fluent" version="8.29.0" />
+ 
+    </resources>
+  
+  </control>
+</manifest>
