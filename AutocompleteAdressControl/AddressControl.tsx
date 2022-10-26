@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Stack, ComboBox, IComboBoxOption } from '@fluentui/react';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { getAddressesFromApi } from './services/Api';
 import {Address, IAdressControlProps} from '../index.types';
 
@@ -19,6 +19,8 @@ const AddressControl = (props: IAdressControlProps) => {
           street: item.street,
           city: item.city,
           zip: item.postcode,
+          longitude: item.x,
+          latitude: item.y
         }]);
       }
       return addresses;

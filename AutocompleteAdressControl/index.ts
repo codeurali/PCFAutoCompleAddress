@@ -16,6 +16,8 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
         street: newValue.street,
         city: newValue.city,
         zip: newValue.zip,
+        longitude: newValue.longitude,
+        latitude: newValue.latitude
       }
       this._notifyOutputChanged();
     }
@@ -65,6 +67,8 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
         street: context.parameters.street.raw,
         city: context.parameters.city.raw,
         zip: context.parameters.zip.raw,
+        longitude: context.parameters.longitude.raw,
+        latitude: context.parameters.latitude.raw
       } as Address;
       this._notifyOutputChanged();
     }
@@ -88,6 +92,8 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
       street: a.street,
       city: a.city,
       zip: a.zip,
+      longitude: a.longitude,
+      latitude: a.latitude
     };
   }
 

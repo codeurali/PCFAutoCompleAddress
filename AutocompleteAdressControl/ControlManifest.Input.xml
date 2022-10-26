@@ -18,13 +18,15 @@
 
     <property name="zip" display-name-key="zip" description-key="zip" of-type="SingleLine.Text" usage="bound" required="false" />
 
-    
+    <property name="longitude" display-name-key="longitude" description-key="longitude" of-type="SingleLine.Text" usage="bound" required="false" />
+
+    <property name="latitude" display-name-key="latitude" description-key="latitude" of-type="SingleLine.Text" usage="bound" required="false" />
 
     <resources>
       <code path="index.ts" order="1"/>
       <platform-library name="React" version="16.8.6" />
       <platform-library name="Fluent" version="8.29.0" />
- 
+
     </resources>
   
   </control>
