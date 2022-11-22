@@ -58,7 +58,7 @@ const AddressControl = (props: IAdressControlProps) => {
     <Stack>
       <ComboBox
         placeholder='coucou'
-        //useComboBoxAsMenuWidth={true}
+        useComboBoxAsMenuWidth={true}
         allowFreeform = {true}
         autoComplete='on'
         autoCapitalize='on'

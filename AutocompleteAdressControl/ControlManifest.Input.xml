@@ -31,7 +31,3 @@
   
   </control>
 </manifest>
-
-AuthType=ClientSecret;Url=https://org8d53b52b.crm12.dynamics.com/;ClientId=e2ee7b84-752d-4b13-9a7a-f3c65c1d4105;ClientSecret=f8cd533b-ec1a-4c03-a8d1-a481a0a2d49a
-
-appid = 28ff1ffe-f059-ed11-9562-000d3a959036
