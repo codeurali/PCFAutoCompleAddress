@@ -17,7 +17,7 @@ const AddressControl = (props: IAdressControlProps) => {
           whole_address: item.label,
           street_number: item.housenumber,
           street: item.street,
-          city: item.city,
+          city: item.city, 
           zip: item.postcode,
           longitude: item.x,
           latitude: item.y
@@ -67,7 +67,6 @@ const AddressControl = (props: IAdressControlProps) => {
         onPendingValueChanged={(option, idx, value) => value && setSearchTerm(value)}
         onChange={(event, option, idx, value) => option && chosenAddress(option)}
         onItemClick={(e, option) => option && chosenAddress(option)}
-      
       />
     </Stack>
   )
