@@ -8,7 +8,7 @@
   <Import Project="$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Solution.props" Condition="Exists('$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Solution.props')" />
 
   <PropertyGroup>
-    <ProjectGuid>2c912275-ae0c-460e-a52e-cfe643373602</ProjectGuid>
+    <ProjectGuid>95130755-548f-41ab-8452-1a016f4f0751</ProjectGuid>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <!--Remove TargetFramework when this is available in 16.1-->
     <TargetFramework>net462</TargetFramework>
@@ -16,10 +16,11 @@
     <SolutionRootPath>src</SolutionRootPath>
   </PropertyGroup>
 
+  <!-- Solution Packager overrides, un-comment to use: SolutionPackagerType (Managed, Unmanaged, Both)
   <PropertyGroup>
-    <SolutionPackageType>Both</SolutionPackageType>
+    <SolutionPackageType>Managed</SolutionPackageType>
   </PropertyGroup>
-  
+  -->
 
   <ItemGroup>
     <PackageReference Include="Microsoft.PowerApps.MSBuild.Solution" Version="1.*" />

@@ -2,7 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\AutocompleteAdressControl",
-    "\\AutocompleteAdressControl\\services"
+    "\\AutocompleteAdressControl\\services",
+    "\\solution",
+    "\\solution\\src",
+    "\\solution\\src\\Other"
   ],
+  "SelectedNode": "\\solution\\src\\Other\\Solution.xml",
   "PreviewInSolutionExplorer": false
 }
