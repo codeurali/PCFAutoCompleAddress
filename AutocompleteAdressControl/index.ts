@@ -45,14 +45,8 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
     this._notifyOutputChanged = notifyOutputChanged;
     this._setProps(context); 
     this._notifyOutputChanged();
-<<<<<<< HEAD
     // if persisted state is available, restore it
     state ?? (this._props.address = state as Address);
-    
-    
-=======
-    state ?? (state = this._props.address);
->>>>>>> main
   }
 
   /**
