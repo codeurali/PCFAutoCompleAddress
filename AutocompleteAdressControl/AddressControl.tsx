@@ -64,12 +64,20 @@ const AddressControl = (props: IAdressControlProps) => {
     }, [searchTerm]);
 
   return (
-    <Stack>
+    <Stack 
+      // set width to 100% to avoid the control to be shrinked
+      styles={{root: {width: '100%'}}}
+    >
       <ComboBox
-        placeholder='hello'
-        //useComboBoxAsMenuWidth={true}
+        placeholder='Rechercher une adresse'
         useComboBoxAsMenuWidth={true}
-        dropdownWidth={2000}
+        // set style div has ms-ComboBox-container to 100% width
+        
+
+        styles={
+          { root: { width: '100%' }, callout: { width: '100%' }, container: { width: '100%' },  }
+          
+        }
         allowFreeform = {true}
         autoComplete='on'
         autoCapitalize='on'
