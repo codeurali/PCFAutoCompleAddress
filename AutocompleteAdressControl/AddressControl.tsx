@@ -9,6 +9,8 @@ const AddressControl = (props: IAdressControlProps) => {
     const [addresses, setAddresses] = useState([] as Address[]);
     const [searchTerm, setSearchTerm] = useState('' as string);
 
+    // Loop on API Address response and push each company in setAddresses
+  // Finally return a list of companies
     const populateAddresses = (result: any) : Address[] => {
       for(let address of result) {
         let item = {...address.properties}
@@ -20,27 +22,33 @@ const AddressControl = (props: IAdressControlProps) => {
           city: item.city, 
           zip: item.postcode,
           longitude: item.x,
-          latitude: item.y
+          latitude: item.y,
+          cityCode : item.citycode,
+          context : item.context
         }]);
       }
       return addresses;
     }
 
+    // Call API Addresses by name when user searching on Combobox input then set setAddresses or return error
     const receiveAddresses = async (searchTerm: string) => {
       const result = await getAddressesFromApi(searchTerm);
       populateAddresses(result);
     }
 
+    // Filter companyList by name when user searching on Combobox input
     const searchForAddresses = (searchTerm: string) => {
       receiveAddresses(searchTerm);
       addresses.filter((address: Address) => address.whole_address.toLowerCase().includes(searchTerm.toLowerCase())); 
     }
 
+    // Set searchTerm when user typing on Combobox input
     const chosenAddress = (option : IComboBoxOption) => {
       let item = addresses.find((address: Address) => address.id === option.key);
       props.handleValueChanged(item as Address);
     }
 
+    // Set searchTerm when user typing on Combobox input
     const addressesOptionsList = addresses
       .filter((address, index, self) => address.whole_address !== null && index === self.findIndex((a)=> (a.whole_address === address.whole_address)))
       .filter(address => address.whole_address.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
@@ -48,6 +56,7 @@ const AddressControl = (props: IAdressControlProps) => {
         return { key: address.id, text: address.whole_address}
       });
 
+      
     useEffect(() => {
       if (searchTerm.length > 3) {
         searchForAddresses(searchTerm);
@@ -57,8 +66,14 @@ const AddressControl = (props: IAdressControlProps) => {
   return (
     <Stack>
       <ComboBox
+<<<<<<< HEAD
         placeholder='coucou'
         //useComboBoxAsMenuWidth={true}
+=======
+        placeholder='hello'
+        useComboBoxAsMenuWidth={true}
+        dropdownWidth={2000}
+>>>>>>> main
         allowFreeform = {true}
         autoComplete='on'
         autoCapitalize='on'

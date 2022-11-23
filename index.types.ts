@@ -7,6 +7,8 @@ export type Address = {
     zip: string;
     longitude: string;
     latitude: string;
+    cityCode: string;
+    context: string;
 };
 
 

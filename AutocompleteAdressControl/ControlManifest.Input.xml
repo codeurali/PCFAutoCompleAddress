@@ -22,6 +22,10 @@
 
     <property name="latitude" display-name-key="latitude" description-key="latitude" of-type="SingleLine.Text" usage="bound" required="false" />
 
+    <property name="citycode" display-name-key="city code" description-key="citycode" of-type="SingleLine.Text" usage="bound" required="false" />
+
+    <property name="context" display-name-key="context" description-key="context" of-type="SingleLine.Text" usage="bound" required="false" />
+
     <resources>
       <code path="index.ts" order="1"/>
       <platform-library name="React" version="16.8.6" />
