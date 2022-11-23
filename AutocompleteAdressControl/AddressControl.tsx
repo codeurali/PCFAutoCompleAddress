@@ -66,8 +66,9 @@ const AddressControl = (props: IAdressControlProps) => {
   return (
     <Stack>
       <ComboBox
-        placeholder='Rechercher une adresse'
+        placeholder='hello'
         useComboBoxAsMenuWidth={true}
+        dropdownWidth={2000}
         allowFreeform = {true}
         autoComplete='on'
         autoCapitalize='on'
