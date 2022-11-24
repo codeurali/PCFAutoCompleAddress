@@ -6,6 +6,7 @@ import * as React from "react";
 export class AutocompleteAddressControl implements ComponentFramework.ReactControl<IInputs, IOutputs> {
   private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>;
   private _notifyOutputChanged: () => void;
+  private _context: ComponentFramework.Context<IInputs>;
   private _props: IAdressControlProps = {
     address: {} as Address,
     handleValueChanged: (newValue: Address) => {
@@ -22,7 +23,8 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
         context: newValue.context,
       }
       this._notifyOutputChanged();
-    }
+    },
+  
   }
 
   /**
@@ -43,8 +45,15 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
     state: ComponentFramework.Dictionary
   ): void {
     this._notifyOutputChanged = notifyOutputChanged;
+    this._context = context;
+    // get api url from environment variable and set it .env file
+    // this.getEnvironmentVariable(context, "API_URL").then((url) => {
+    //   this._props.apiUrl = url;
+    // });
+    
     this._setProps(context); 
     this._notifyOutputChanged();
+    state ?? (this._props.address = state);
   }
 
   /**
@@ -101,6 +110,14 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
       context: a.context,
     };
   }
+
+// Get api url from environment variable using the name of the variable as parameter with context web api
+  private async getEnvironmentVariable(context: ComponentFramework.Context<IInputs>, variableName: string): Promise<string> {
+    let variable: ComponentFramework.WebApi.Entity = await context.webAPI.retrieveRecord("environmentvariabledefinition", variableName);
+    let variableValue: ComponentFramework.WebApi.Entity = await context.webAPI.retrieveRecord("environmentvariablevalue", variable["environmentvariabledefinitionid"]);
+    return variableValue["value"];
+  }
+
 
   /**
    * Called when the control is to be removed from the DOM tree. Controls should use this call for cleanup.

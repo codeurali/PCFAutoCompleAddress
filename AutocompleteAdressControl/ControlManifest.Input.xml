@@ -18,9 +18,9 @@
 
     <property name="zip" display-name-key="zip" description-key="zip" of-type="SingleLine.Text" usage="bound" required="false" />
 
-    <property name="longitude" display-name-key="longitude" description-key="longitude" of-type="SingleLine.Text" usage="bound" required="false" />
+    <property name="longitude" display-name-key="longitude" description-key="longitude" of-type="Decimal" usage="bound" required="false" />
 
-    <property name="latitude" display-name-key="latitude" description-key="latitude" of-type="SingleLine.Text" usage="bound" required="false" />
+    <property name="latitude" display-name-key="latitude" description-key="latitude" of-type="Decimal" usage="bound" required="false" />
 
     <property name="citycode" display-name-key="city code" description-key="citycode" of-type="SingleLine.Text" usage="bound" required="false" />
 
