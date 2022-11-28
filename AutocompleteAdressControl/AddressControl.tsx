@@ -14,15 +14,16 @@ const AddressControl = (props: IAdressControlProps) => {
     const populateAddresses = (result: any) : Address[] => {
       for(let address of result) {
         let item = {...address.properties}
+        let coo = {...address.geometry.coordinates}
         item.label && setAddresses(addresses => [...addresses, {
           id: item.id,
           whole_address: item.label,
           street_number: item.housenumber,
           street: item.street,
-          city: item.city,
+          city: item.city, 
           zip: item.postcode,
-          longitude: item.x,
-          latitude: item.y,
+          longitude: coo[0],
+          latitude: coo[1],
           cityCode : item.citycode,
           context : item.context
         }]);
@@ -48,6 +49,7 @@ const AddressControl = (props: IAdressControlProps) => {
       props.handleValueChanged(item as Address);
     }
 
+
     // Set searchTerm when user typing on Combobox input
     const addressesOptionsList = addresses
       .filter((address, index, self) => address.whole_address !== null && index === self.findIndex((a)=> (a.whole_address === address.whole_address)))
@@ -64,18 +66,28 @@ const AddressControl = (props: IAdressControlProps) => {
     }, [searchTerm]);
 
   return (
-    <Stack>
+    <Stack 
+      // set width to 100% to avoid the control to be shrinked
+      styles={{root: {width: '100%'}}}
+    >
       <ComboBox
         placeholder='hello'
         useComboBoxAsMenuWidth={true}
+<<<<<<< HEAD
         dropdownWidth={2000}
+=======
+        // set style div has ms-ComboBox-container to 100% width
+        styles={
+          { root: { width: '100%' }, callout: { width: '100%' }, container: { width: '100%' },  }   
+        }
+>>>>>>> f2fca594a004f682cff69a09bb6346e8ddb0bb08
         allowFreeform = {true}
         autoComplete='on'
         autoCapitalize='on'
         openOnKeyboardFocus={true}
         options={addressesOptionsList}
         onPendingValueChanged={(option, idx, value) => value && setSearchTerm(value)}
-        onChange={(event, option, idx, value) => option && chosenAddress(option)}
+        onChange={(event, option, idx, value) => option ? chosenAddress(option) : console.error(idx, value)}
         onItemClick={(e, option) => option && chosenAddress(option)}
       />
     </Stack>
