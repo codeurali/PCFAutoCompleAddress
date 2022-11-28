@@ -17,15 +17,16 @@ const AddressControl = (props: IAdressControlProps) => {
         let coo = {...address.geometry.coordinates}
         item.label && setAddresses(addresses => [...addresses, {
           id: item.id,
-          whole_address: item.label,
+          adresse_complete: item.label,
           street_number: item.housenumber,
-          street: item.street,
+          street_name: item.street,
           city: item.city, 
-          zip: item.postcode,
+          postcode: item.postcode,
           longitude: coo[0],
           latitude: coo[1],
-          cityCode : item.citycode,
-          context : item.context
+          codeINSEE : item.citycode,
+          region: item.context.split(',').pop(),
+          simple_address: item.name,
         }]);
       }
       return addresses;
@@ -40,7 +41,7 @@ const AddressControl = (props: IAdressControlProps) => {
     // Filter companyList by name when user searching on Combobox input
     const searchForAddresses = (searchTerm: string) => {
       receiveAddresses(searchTerm);
-      addresses.filter((address: Address) => address.whole_address.toLowerCase().includes(searchTerm.toLowerCase())); 
+      addresses.filter((address: Address) => address.adresse_complete.toLowerCase().includes(searchTerm.toLowerCase())); 
     }
 
     // Set searchTerm when user typing on Combobox input
@@ -52,10 +53,10 @@ const AddressControl = (props: IAdressControlProps) => {
 
     // Set searchTerm when user typing on Combobox input
     const addressesOptionsList = addresses
-      .filter((address, index, self) => address.whole_address !== null && index === self.findIndex((a)=> (a.whole_address === address.whole_address)))
-      .filter(address => address.whole_address.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
+      .filter((address, index, self) => address.adresse_complete !== null && index === self.findIndex((a)=> (a.adresse_complete === address.adresse_complete)))
+      .filter(address => address.adresse_complete.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
       .map((address: Address) => {
-        return { key: address.id, text: address.whole_address}
+        return { key: address.id, text: address.adresse_complete}
       });
 
       
@@ -71,16 +72,11 @@ const AddressControl = (props: IAdressControlProps) => {
       styles={{root: {width: '100%'}}}
     >
       <ComboBox
-        placeholder='hello'
+        placeholder='Rechercher une adresse'
         useComboBoxAsMenuWidth={true}
-<<<<<<< HEAD
-        dropdownWidth={2000}
-=======
-        // set style div has ms-ComboBox-container to 100% width
         styles={
           { root: { width: '100%' }, callout: { width: '100%' }, container: { width: '100%' },  }   
         }
->>>>>>> f2fca594a004f682cff69a09bb6346e8ddb0bb08
         allowFreeform = {true}
         autoComplete='on'
         autoCapitalize='on'

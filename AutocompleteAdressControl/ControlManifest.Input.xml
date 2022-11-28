@@ -6,25 +6,27 @@
    
     </external-service-usage>
    
-    <property name="id" display-name-key="AdressID" description-key="AdressID" of-type="SingleLine.Text" usage="bound" required="true" />
+    <property name="id" display-name-key="AdressID" description-key="Numéro unique de l'adresse" of-type="SingleLine.Text" usage="bound" required="true" />
 
-    <property name="whole_address" display-name-key="whole_address" description-key="whole_address" of-type="SingleLine.Text" usage="bound" required="false" />
+    <property name="adresse_complete" display-name-key="adresse_complete" description-key="Champs utiliser pour rechercher une adresse via" of-type="SingleLine.Text" usage="bound" required="false" />
 
-    <property name="street_number" display-name-key="street_numbers" description-key="street_number" of-type="SingleLine.Text" usage="bound" required="false" />
+    <property name="street_number" display-name-key="street_number" description-key="Numéro de la rue" of-type="SingleLine.Text" usage="bound" required="false" />
 
-    <property name="street" display-name-key="street" description-key="street" of-type="SingleLine.Text" usage="bound" required="false" />
+    <property name="street_name" display-name-key="street_name" description-key="Nom de la rue" of-type="SingleLine.Text" usage="bound" required="false" />
 
-    <property name="city" display-name-key="city" description-key="city" of-type="SingleLine.Text" usage="bound" required="false" />
+    <property name="city" display-name-key="city" description-key="Nom de la ville" of-type="SingleLine.Text" usage="bound" required="false" />
 
-    <property name="zip" display-name-key="zip" description-key="zip" of-type="SingleLine.Text" usage="bound" required="false" />
+    <property name="postcode" display-name-key="postcode" description-key="Code Postal" of-type="SingleLine.Text" usage="bound" required="false" />
 
     <property name="longitude" display-name-key="longitude" description-key="longitude" of-type="Decimal" usage="bound" required="false" />
 
     <property name="latitude" display-name-key="latitude" description-key="latitude" of-type="Decimal" usage="bound" required="false" />
 
-    <property name="citycode" display-name-key="city code" description-key="citycode" of-type="SingleLine.Text" usage="bound" required="false" />
+    <property name="codeINSEE" display-name-key="codeINSEE" description-key="code INSEE" of-type="SingleLine.Text" usage="bound" required="false" />
 
-    <property name="context" display-name-key="context" description-key="context" of-type="SingleLine.Text" usage="bound" required="false" />
+    <property name="region" display-name-key="region" description-key="Nom de la region" of-type="SingleLine.Text" usage="bound" required="false" />
+
+    <property name="simple_address" display-name-key="simple_address" description-key="simple_address" of-type="SingleLine.Text" usage="bound" required="false" />
 
     <resources>
       <code path="index.ts" order="1"/>

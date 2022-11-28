@@ -12,15 +12,16 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
     handleValueChanged: (newValue: Address) => {
       this._props.address = {
         id: newValue.id,
-        whole_address: newValue.whole_address,
+        adresse_complete: newValue.adresse_complete,
         street_number: newValue.street_number,
-        street: newValue.street,
+        street_name: newValue.street_name,
         city: newValue.city,
-        zip: newValue.zip,
+        postcode: newValue.postcode,
         longitude: newValue.longitude,
         latitude: newValue.latitude,
-        cityCode: newValue.cityCode,
-        context: newValue.context,
+        codeINSEE: newValue.codeINSEE,
+        region: newValue.region,
+        simple_address: newValue.simple_address,
       }
       this._notifyOutputChanged();
     },
@@ -53,11 +54,7 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
     
     this._setProps(context); 
     this._notifyOutputChanged();
-<<<<<<< HEAD
-    state ?? (state = this._props.address);
-=======
-    state ?? (this._props.address = state);
->>>>>>> f2fca594a004f682cff69a09bb6346e8ddb0bb08
+    state ?? (this._props.address = state as Address);
   }
 
   /**
@@ -73,18 +70,19 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
   }
 
   private _setProps(context: ComponentFramework.Context<IInputs>): void {
-    if (context.parameters.whole_address.raw) {
+    if (context.parameters.adresse_complete.raw) {
       this._props.address = {
         id: context.parameters.id.raw,
-        whole_address: context.parameters.whole_address.raw,
+        adresse_complete: context.parameters.adresse_complete.raw,
         street_number: context.parameters.street_number.raw,
-        street: context.parameters.street.raw,
+        street_name: context.parameters.street_name.raw,
         city: context.parameters.city.raw,
-        zip: context.parameters.zip.raw,
+        postcode: context.parameters.postcode.raw,
         longitude: context.parameters.longitude.raw,
         latitude: context.parameters.latitude.raw,
-        cityCode: context.parameters.citycode.raw,
-        context: context.parameters.context.raw,
+        codeINSEE: context.parameters.codeINSEE.raw,
+        region: context.parameters.region.raw,
+        simple_address: context.parameters.simple_address.raw,
       } as Address;
       this._notifyOutputChanged();
     }
@@ -103,15 +101,16 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
     let a = { ...this._props.address }
     return {
       id: a.id,
-      whole_address: a.whole_address,
+      adresse_complete: a.adresse_complete,
       street_number: a.street_number,
-      street: a.street,
+      street_name: a.street_name,
       city: a.city,
-      zip: a.zip,
+      postcode: a.postcode,
       longitude: a.longitude,
       latitude: a.latitude,
-      citycode: a.cityCode,
-      context: a.context,
+      codeINSEE: a.codeINSEE,
+      region: a.region,
+      simple_address: a.simple_address,
     };
   }
 

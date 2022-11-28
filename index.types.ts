@@ -1,14 +1,15 @@
 export type Address = {
     id: string;
-    whole_address: string;
+    adresse_complete: string;
     street_number: string,
-    street: string;
+    street_name: string;
     city: string;
-    zip: string;
+    postcode: string;
     longitude: number;
     latitude: number;
-    cityCode: string;
-    context: string;
+    codeINSEE: string;
+    region: string;
+    simple_address: string;
 };
 
 export interface IAdressControlProps {
