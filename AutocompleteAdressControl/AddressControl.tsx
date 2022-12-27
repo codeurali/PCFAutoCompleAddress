@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Stack, ComboBox, IComboBoxOption } from '@fluentui/react';
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { getAddressesFromApi } from './services/Api';
 import {Address, IAdressControlProps} from '../index.types';
 
-const AddressControl = (props: IAdressControlProps) => {
+const AddressControl =  (props: IAdressControlProps) => {
 
     const [addresses, setAddresses] = useState([] as Address[]);
     const [searchTerm, setSearchTerm] = useState('' as string);
@@ -27,6 +27,8 @@ const AddressControl = (props: IAdressControlProps) => {
           codeINSEE : item.citycode,
           region: item.context.split(',').pop(),
           simple_address: item.name,
+          numero_departement: item.context.split(",")[0],
+          departement: item.context.split(",")[1],
         }]);
       }
       return addresses;
@@ -41,7 +43,15 @@ const AddressControl = (props: IAdressControlProps) => {
     // Filter companyList by name when user searching on Combobox input
     const searchForAddresses = (searchTerm: string) => {
       receiveAddresses(searchTerm);
-      addresses.filter((address: Address) => address.adresse_complete.toLowerCase().includes(searchTerm.toLowerCase())); 
+      addresses.filter((address: Address) => (matchAddress(address, searchTerm))); 
+    }
+
+
+
+    // Regex to match the address with the address in the list even if user type a wrong letter or a wrong accent 
+    const matchAddress = (address: Address, searchTerm: string) => {
+      let regex = new RegExp(searchTerm.normalize("NFD").replace(/\p{Diacritic}/gu, ""), "");
+      return regex.test(address.adresse_complete.normalize("NFD").replace(/\p{Diacritic}/gu, ""));
     }
 
     // Set searchTerm when user typing on Combobox input
@@ -55,28 +65,26 @@ const AddressControl = (props: IAdressControlProps) => {
     const addressesOptionsList = addresses
       .filter((address, index, self) => address.adresse_complete !== null && index === self.findIndex((a)=> (a.adresse_complete === address.adresse_complete)))
       .filter(address => address.adresse_complete.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
+      .slice(0, 10)
       .map((address: Address) => {
         return { key: address.id, text: address.adresse_complete}
       });
-
       
-    useEffect(() => {
+    
+    useMemo(() => {
       if (searchTerm.length > 3) {
         searchForAddresses(searchTerm);
       }
     }, [searchTerm]);
 
   return (
-    <Stack 
-      // set width to 100% to avoid the control to be shrinked
+    <Stack
       styles={{root: {width: '100%'}}}
     >
       <ComboBox
-        placeholder='Rechercher une adresse'
+        placeholder='Rechercher une adresse...'
         useComboBoxAsMenuWidth={true}
-        styles={
-          { root: { width: '100%' }, callout: { width: '100%' }, container: { width: '100%' },  }   
-        }
+        styles={{ root: { width: '100%', selectors: {':after' : {border:0}}   }, container: { width: '100%'} }}
         allowFreeform = {true}
         autoComplete='on'
         autoCapitalize='on'

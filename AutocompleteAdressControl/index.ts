@@ -22,6 +22,8 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
         codeINSEE: newValue.codeINSEE,
         region: newValue.region,
         simple_address: newValue.simple_address,
+        numero_departement: newValue.numero_departement,
+        departement: newValue.departement,
       }
       this._notifyOutputChanged();
     },
@@ -47,14 +49,11 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
   ): void {
     this._notifyOutputChanged = notifyOutputChanged;
     this._context = context;
-    // get api url from environment variable and set it .env file
-    // this.getEnvironmentVariable(context, "API_URL").then((url) => {
-    //   this._props.apiUrl = url;
-    // });
     
     this._setProps(context); 
     this._notifyOutputChanged();
     state ?? (this._props.address = state as Address);
+    console.log("state", state)
   }
 
   /**
@@ -83,6 +82,8 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
         codeINSEE: context.parameters.codeINSEE.raw,
         region: context.parameters.region.raw,
         simple_address: context.parameters.simple_address.raw,
+        numero_departement: context.parameters.numero_departement.raw,
+        departement: context.parameters.departement.raw,
       } as Address;
       this._notifyOutputChanged();
     }
@@ -111,14 +112,9 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
       codeINSEE: a.codeINSEE,
       region: a.region,
       simple_address: a.simple_address,
+      numero_departement: a.numero_departement,
+      departement: a.departement,
     };
-  }
-
-// Get api url from environment variable using the name of the variable as parameter with context web api
-  private async getEnvironmentVariable(context: ComponentFramework.Context<IInputs>, variableName: string): Promise<string> {
-    let variable: ComponentFramework.WebApi.Entity = await context.webAPI.retrieveRecord("environmentvariabledefinition", variableName);
-    let variableValue: ComponentFramework.WebApi.Entity = await context.webAPI.retrieveRecord("environmentvariablevalue", variable["environmentvariabledefinitionid"]);
-    return variableValue["value"];
   }
 
 

@@ -10,9 +10,12 @@ export type Address = {
     codeINSEE: string;
     region: string;
     simple_address: string;
+    numero_departement: string;
+    departement: string;
 };
 
 export interface IAdressControlProps {
   address: Address
+  // eslint-disable-next-line no-unused-vars
   handleValueChanged: (newValue: Address) => void;
 }
