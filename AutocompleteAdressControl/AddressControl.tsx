@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Stack, ComboBox, IComboBoxOption } from '@fluentui/react';
-import { useState, useMemo } from 'react';
+import { Stack, ComboBox, IComboBoxOption, IComboBox } from '@fluentui/react';
+import { useState, useMemo, useRef, useCallback } from 'react';
 import { getAddressesFromApi } from './services/Api';
 import {Address, IAdressControlProps} from '../index.types';
 
@@ -9,8 +9,10 @@ const AddressControl =  (props: IAdressControlProps) => {
     const [addresses, setAddresses] = useState([] as Address[]);
     const [searchTerm, setSearchTerm] = useState('' as string);
 
-    // Loop on API Address response and push each company in setAddresses
-  // Finally return a list of companies
+    const comboBoxRef = useRef<IComboBox>(null);
+    const onOpenClick = useCallback(() => comboBoxRef.current?.focus(true), [])
+
+    // Loop on API Address response and push each company in setAddresses then return a list of companies
     const populateAddresses = (result: any) : Address[] => {
       for(let address of result) {
         let item = {...address.properties}
@@ -36,22 +38,10 @@ const AddressControl =  (props: IAdressControlProps) => {
 
     // Call API Addresses by name when user searching on Combobox input then set setAddresses or return error
     const receiveAddresses = async (searchTerm: string) => {
+      setAddresses([] as Address[]);
       const result = await getAddressesFromApi(searchTerm);
       populateAddresses(result);
-    }
-
-    // Filter companyList by name when user searching on Combobox input
-    const searchForAddresses = (searchTerm: string) => {
-      receiveAddresses(searchTerm);
-      addresses.filter((address: Address) => (matchAddress(address, searchTerm))); 
-    }
-
-
-
-    // Regex to match the address with the address in the list even if user type a wrong letter or a wrong accent 
-    const matchAddress = (address: Address, searchTerm: string) => {
-      let regex = new RegExp(searchTerm.normalize("NFD").replace(/\p{Diacritic}/gu, ""), "");
-      return regex.test(address.adresse_complete.normalize("NFD").replace(/\p{Diacritic}/gu, ""));
+      console.log(addresses)
     }
 
     // Set searchTerm when user typing on Combobox input
@@ -60,11 +50,9 @@ const AddressControl =  (props: IAdressControlProps) => {
       props.handleValueChanged(item as Address);
     }
 
-
     // Set searchTerm when user typing on Combobox input
     const addressesOptionsList = addresses
       .filter((address, index, self) => address.adresse_complete !== null && index === self.findIndex((a)=> (a.adresse_complete === address.adresse_complete)))
-      .filter(address => address.adresse_complete.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
       .slice(0, 10)
       .map((address: Address) => {
         return { key: address.id, text: address.adresse_complete}
@@ -73,7 +61,7 @@ const AddressControl =  (props: IAdressControlProps) => {
     
     useMemo(() => {
       if (searchTerm.length > 3) {
-        searchForAddresses(searchTerm);
+        receiveAddresses(searchTerm);
       }
     }, [searchTerm]);
 
@@ -93,6 +81,8 @@ const AddressControl =  (props: IAdressControlProps) => {
         onPendingValueChanged={(option, idx, value) => value && setSearchTerm(value)}
         onChange={(event, option, idx, value) => option ? chosenAddress(option) : console.error(idx, value)}
         onItemClick={(e, option) => option && chosenAddress(option)}
+        componentRef={comboBoxRef}
+        onClick={onOpenClick}
       />
     </Stack>
   )

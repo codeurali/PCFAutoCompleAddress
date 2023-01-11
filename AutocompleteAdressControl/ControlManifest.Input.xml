@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="PCFAutocompleteAddress" constructor="AutocompleteAddressControl" version="0.0.1" display-name-key="AutocompleteAddressControl" description-key="AutocompleteAddressControl description" control-type="virtual" >
+  <control namespace="PCFAutocompleteAddress" constructor="AutocompleteAddressControl" version="1.0.1" display-name-key="AutocompleteAddressControl" description-key="AutocompleteAddressControl description" control-type="virtual" >
 
     <external-service-usage enabled="false">
    
@@ -18,9 +18,9 @@
 
     <property name="postcode" display-name-key="Code_Postal" description-key="Code_Postal" of-type="SingleLine.Text" usage="bound" required="false" />
 
-    <property name="longitude" display-name-key="Longitude" description-key="longitude" of-type="Decimal" usage="bound" required="false" />
+    <property name="longitude" display-name-key="Longitude" description-key="longitude" of-type="FP" usage="bound" required="false" />
 
-    <property name="latitude" display-name-key="Latitude" description-key="latitude" of-type="Decimal" usage="bound" required="false" />
+    <property name="latitude" display-name-key="Latitude" description-key="latitude" of-type="FP" usage="bound" required="false" />
 
     <property name="codeINSEE" display-name-key="Code_INSEE" description-key="code_INSEE" of-type="SingleLine.Text" usage="bound" required="false" />
 
