@@ -24,6 +24,7 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
         simple_address: newValue.simple_address,
         numero_departement: newValue.numero_departement,
         departement: newValue.departement,
+        
       }
       this._notifyOutputChanged();
     },
@@ -45,15 +46,17 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
   public init(
     context: ComponentFramework.Context<IInputs>,
     notifyOutputChanged: () => void,
-    state: ComponentFramework.Dictionary
+    state: ComponentFramework.Dictionary,
   ): void {
     this._notifyOutputChanged = notifyOutputChanged;
     this._context = context;
-    
-    this._setProps(context); 
+    console.log("init", context);
+    console.log("_init", this._context);
+    this._setProps(context);
     this._notifyOutputChanged();
     state ?? (this._props.address = state as Address);
     console.log("state", state)
+    console.log("state " + context.mode.setControlState(state));
   }
 
   /**
@@ -88,6 +91,11 @@ export class AutocompleteAddressControl implements ComponentFramework.ReactContr
       this._notifyOutputChanged();
     }
   }
+
+  // retrieve address from web api and set it to props using context Web Api
+  // private _retrieveAdressFromWebAPI(context: ComponentFramework.Context<IInputs>): void {
+  //   var query = context.webAPI.retrieveRecord("account", context.parameters.id.raw, "?$select=address1_line1,address1_line2,address1_line3,address1_city,address1_postalcode,address1_stateorprovince,address1_country,address1_latitude,address1_longitude");
+  // }
 
   public clearRecivedProps(): void {
     this._props.address = {} as Address;
